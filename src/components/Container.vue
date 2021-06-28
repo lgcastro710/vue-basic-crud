@@ -1,9 +1,12 @@
 <template>
-  <div class="container">
-    <div class="row pt-3">
-      <h3>Mi lista de pasatiempos</h3>
-      <Form :agregar="agregar" class=""></Form>
-      <List :lista="lista" :eliminar="eliminar" class=""></List>
+  <div class="container mx-auto">
+    <div class="flex p-4 flex-col md:flex-row">
+      <div class="p-4 box-border w-full md:w-96">
+        <Form :agregar="agregar"></Form>
+      </div>
+      <div class="box-border" style="width: 100%">
+        <List :lista="lista" :eliminar="eliminar"></List>
+      </div>
     </div>
   </div>
 </template>
@@ -20,58 +23,47 @@ export default {
     Form,
     List,
   },
-  data() {
-    return {
-      lista: [],
-    };
-  },
-
+  data: () => ({
+    lista: [],
+  }),
   methods: {
-    agregar: function (clave, producto, precio, descripcion) {
-      if (
-        clave === "" ||
-        producto === "" ||
-        precio === "" ||
-        descripcion === ""
-      ) {
-        return false;
-      }
-      var item = {
-        clave: clave,
-        producto: producto,
-        precio: precio,
-        descripcion: descripcion,
-      };
-      // app.lista.push(item);
+    listarElementos: function () {
+      const datos = firebase.database().ref("vue-store");
+      datos.on("value", (snapshot) => {
+        this.lista = [];
+        snapshot.forEach((childSnapshot) => {
+          const childData = childSnapshot.val();
+          if (
+            childData.imageUrl === "" ||
+            childData.imageUrl.slice(0, 4) !== "http"
+          ) {
+            childData.imageUrl = require("../assets/bg-not-found.png");
+          }
+          this.lista.push(childData);
+        });
+      });
+    },
+
+    agregar: function (clave, nombre, descripcion, imageUrl, precio) {
+      const item = { clave, nombre, descripcion, imageUrl, precio };
       firebase
         .database()
         .ref("vue-store/" + clave)
         .set(item);
     },
+
     eliminar: function (clave) {
-      var index = this.lista
-        .map((obj) => {
+      const index = this.lista
+        .map(function (obj) {
           return obj.clave;
         })
         .indexOf(clave);
 
       this.lista.splice(index, 1);
-
       firebase
         .database()
         .ref("vue-store/" + clave)
         .remove();
-    },
-
-    listarElementos: function () {
-      var datos = firebase.database().ref("vue-store");
-      datos.on("value", (snapshot) => {
-        this.lista = [];
-        snapshot.forEach((childSnapshot) => {
-          var childData = childSnapshot.val();
-          this.lista.push(childData);
-        });
-      });
     },
   },
 
@@ -80,6 +72,8 @@ export default {
   },
 };
 </script>
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

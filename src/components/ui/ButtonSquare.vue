@@ -1,19 +1,18 @@
 <template>
   <button
     v-on:click.prevent="onClick(data)"
-    class="p-4 text-white font-bold hover:opacity-90"
-    style="background-color: #48cdfb; min-width: 120px"
+    class="p-4 text-white card-close hover:opacity-90"
+    :style="'background-color:' + bg"
   >
-    {{ title }}
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: "Button",
+  name: "ButtonSquare",
   props: {
-    title: String,
+    bg: String,
     onClick: Function,
     data: Object || String,
   },

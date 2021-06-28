@@ -1,62 +1,80 @@
 <template>
-  <div class="col-8">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1"
-          ><i class="fa fa-search"></i
-        ></span>
-      </div>
-      <input type="text" class="form-control" v-model="txtBuscar" />
+  <div class="col-12">
+    <div class="flex p-4">
+      <input
+        type="text"
+        class="form-control search-input"
+        v-model="txtBuscar"
+        placeholder="Buscar"
+      />
+      <ButtonSquare :data="{}" :onClick="() => {}" bg="#48cdfb">
+        <i class="fa fa-search"></i>
+      </ButtonSquare>
     </div>
-    <ul class="md-layout md-gutter md-alignment-center">
-      <ListItem
+    <Modal v-if="item" :onClose="onClose" :data="item"></Modal>
+    <ul class="flex" style="flex-wrap: wrap">
+      <LisItem
         v-for="(item, key) in listaFiltrada"
         v-bind:key="key"
         :item="item"
         :eliminar="eliminar"
-        class="row"
-      ></ListItem>
+        :setItem="setItem"
+      ></LisItem>
     </ul>
   </div>
 </template>
 
 <script>
-import ListItem from "./ListItem";
+import LisItem from "./ListItem";
+import ButtonSquare from "./ui/ButtonSquare";
+import Modal from "./ui/Modal";
 
 export default {
-  components: {
-    ListItem,
-  },
-  data() {
-    return {
-      txtBuscar: "",
-    };
-  },
+  name: "List",
   props: {
     lista: Array,
     eliminar: Function,
   },
+  components: {
+    LisItem,
+    ButtonSquare,
+    Modal,
+  },
+  data: function () {
+    return {
+      txtBuscar: "",
+      item: null,
+    };
+  },
+
   computed: {
     listaFiltrada: function () {
-      var arreglo = this.lista;
-      var consulta = this.txtBuscar;
+      let arreglo = this.lista;
+      const consulta = this.txtBuscar;
 
       if (consulta !== "") {
-        arreglo = arreglo.filter(function (obj) {
-          return (
+        arreglo = this.lista?.filter(
+          ({ nombre, descripcion, precio }) =>
             (
-              obj.titulo.toLowerCase() +
+              nombre.toLowerCase() +
               " " +
-              obj.descripcion.toLowerCase()
+              descripcion.toLowerCase() +
+              " " +
+              precio.toLowerCase()
             ).indexOf(consulta.toLowerCase()) > -1
-          );
-        });
+        );
       }
-
       return arreglo;
+    },
+  },
+  methods: {
+    setItem: function (item) {
+      console.log("item", item);
+      this.item = item;
+    },
+    onClose: function () {
+      this.item = null;
     },
   },
 };
 </script>
-<style>
-</style>

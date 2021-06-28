@@ -1,81 +1,49 @@
 <template>
-  <li
-    class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100"
-  >
-    <!-- {{ item.clave }}-{{ item.titulo }} : {{ item.descripcion }} -->
-    <!-- <button
-          v-on:click.prevent="eliminar(item.clave)"
-          class="btn btn-danger"
-        >
-          <i class="fa fa-trash"></i>
-        </button> -->
-
-    <Card>
-      <md-card>
-        <md-card-media>
-          <!-- <img src="/assets/examples/card-image-1.jpg" alt="People"> -->
-        </md-card-media>
-
-        <md-card-header>
-          <div class="md-title">{{ item.producto }}</div>
-          <div class="md-subhead">$:{{ item.precio }}</div>
-        </md-card-header>
-
-        <md-card-expand>
-          <md-card-actions md-alignment="space-between">
-            <div>
-              <md-button
-                v-on:click.prevent="eliminar(item.clave)"
-                class="md-raised md-accent md-button-p"
-              >
-                <i class="fa fa-trash"></i>
-              </md-button>
-            </div>
-
-            <md-card-expand-trigger>
-              <md-button>Learn more</md-button>
-            </md-card-expand-trigger>
-          </md-card-actions>
-
-          <md-card-expand-content>
-            <md-card-content>
-              {{ item.descripcion }}
-            </md-card-content>
-          </md-card-expand-content>
-        </md-card-expand>
-      </md-card>
+  <li class="w-full p-4 md:w-1/2 lg:w-1/3">
+    <Card style="padding: 0">
+      <div class="card-header">
+        <div class="card-title">{{ item.nombre }}</div>
+        <ButtonSquare :data="item" :onClick="deleteProduct" bg="#f47477">
+          <i class="fa fa-close"></i>
+        </ButtonSquare>
+      </div>
+      <div class="card-body">
+        <img :src="item.imageUrl" style="max-width: 173px; height: 205px" />
+        <h2 class="card-description">
+          {{ item.precio }}
+        </h2>
+      </div>
+      <div class="card-footer">
+        <Button title="Ver" :onClick="setItemSelected" :data="item"></Button>
+      </div>
     </Card>
   </li>
 </template>
 
 <script>
-import Card from "../components/ui/Card.vue";
+import Card from "./ui/Card";
+import ButtonSquare from "./ui/ButtonSquare";
+import Button from "./ui/Button";
+
 export default {
+  name: "ListItem",
   props: {
     item: Object,
     eliminar: Function,
+    setItem: Function,
   },
   components: {
     Card,
+    ButtonSquare,
+    Button,
+  },
+  methods: {
+    deleteProduct: function (data) {
+      this.eliminar(data.clave);
+    },
+    setItemSelected: function (item) {
+      this.setItem(item);
+    },
   },
 };
 </script>
-<style  scoped>
-li {
-  margin: 0;
-}
-.card-expansion {
-  height: 480px;
-}
-
-.md-card {
-  width: 320px;
-  margin: 4px;
-  display: inline-block;
-  vertical-align: top;
-}
-.md-button-p {
-  min-width: 20px !important;
-  height: 30px !important;
-}
-</style>

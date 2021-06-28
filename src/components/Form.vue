@@ -1,75 +1,87 @@
 <template>
-  <div class="col-4">
-    <form>
-      <div class="form-group">
-        <label for="clave">Clave</label>
+  <div class="flex items-center justify-center card card-form bg-cover">
+    <h2 class="card-description" style="color: #ffffff">
+      Crear Nuevo Producto
+    </h2>
+    <form class="text-center" action="#" method="POST">
+      <div class="my-4">
         <input
+          id="nombre"
           type="text"
-          class="form-control"
-          id="clave"
-          v-model="clave"
-          placeholder="Ingresa una clave"
+          placeholder="Nombre"
+          class="form-control search-input border"
+          v-model="nombre"
+          v-on:keypress="onChangeDataFrom"
         />
-      </div>
-      <div class="form-group">
-        <label for="producto">Producto</label>
+
         <input
-          type="text"
-          class="form-control"
-          id="producto"
-          v-model="producto"
-          placeholder="Ingresa una producto"
-        />
-      </div>
-      <div class="form-group">
-        <label for="precio">Precio</label>
-        <input
-          type="text"
-          class="form-control"
           id="precio"
-          v-model="precio"
-          placeholder="Ingresa una precio"
-        />
-      </div>
-      <div class="form-group">
-        <label for="descripcion">Descripcion</label>
-        <textarea
           type="text"
-          class="form-control"
-          id="descripcion"
+          placeholder="Precio"
+          class="form-control search-input border"
+          v-model="precio"
+          v-on:keypress="onChangeDataFrom"
+        />
+
+        <input
+          id="imageUrl"
+          type="text"
+          placeholder="Imagen URL"
+          class="form-control search-input border"
+          v-model="imageUrl"
+        />
+
+        <textarea
+          class="h-24 form-control search-input border"
           v-model="descripcion"
-          placeholder="Ingresa una descripcion"
+          placeholder="Descripcion"
+          v-on:keypress="onChangeDataFrom"
         />
       </div>
-      <!-- <button
-        class="btn btn-primary"
-        v-on:click.prevent="agregar(clave, titulo, descripcion)"
-      >
-        <i class="fa fa-save"></i> Guardar
-      </button> -->
-      <md-button
-        class="md-raised md-primary"
-        v-on:click.prevent="agregar(clave, producto, precio, descripcion)"
-      >
-        <i class="fa fa-save m-2"></i>Guardar
-      </md-button>
+      <div>
+        <p>{{ message }}</p>
+      </div>
+
+      <Button title="Crear" :onClick="addProduct"></Button>
     </form>
-    <hr />
   </div>
 </template>
 
 <script>
+import Button from "./ui/Button";
+import { v4 as uuidv4 } from "uuid";
+
 export default {
-  data() {
-    return {
-      clave: "",
-      producto: "",
-      precio: "",
-      descripcion: "",
-    };
-  },
+  name: "Form",
   props: {
     agregar: Function,
+  },
+  components: { Button },
+  data: () => ({
+    nombre: "",
+    descripcion: "",
+    imageUrl: "",
+    precio: "",
+    message: "",
+  }),
+  methods: {
+    addProduct: function () {
+      if (this.nombre === "" || this.descripcion === "" || this.precio === "") {
+        this.message = "Campos requeridos";
+        return false;
+      }
+      this.message = "";
+      this.agregar(
+        uuidv4(),
+        this.nombre,
+        this.descripcion,
+        this.imageUrl,
+        this.precio
+      );
+    },
+    onChangeDataFrom: function () {
+      this.message = "";
+    },
   },
 };
 </script>

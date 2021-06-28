@@ -50,7 +50,7 @@
                     LOGIN
                   </h2>
                 </div>
-                <form class="mt-8 space-y-6" action="#" method="POST">
+                <div class="mt-8 space-y-6" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
                   <div class="rounded-md shadow-sm -space-y-px">
                     <div class="mb-2">
@@ -77,7 +77,6 @@
                           name="email"
                           type="email"
                           autocomplete="email"
-                          required
                           class="
                             padding-input
                             appearance-none
@@ -120,7 +119,6 @@
                           name="password"
                           type="password"
                           autocomplete="current-password"
-                          required
                           class="
                             padding-input
                             appearance-none
@@ -183,30 +181,31 @@
                   </div>
 
                   <div>
-                    <button
-                      type="submit"
-                      class="
-                        style-button
-                        group
-                        relative
-                        w-full
-                        flex
-                        justify-center
-                        py-2
-                        px-4
-                        border border-transparent
-                        text-sm
-                        font-medium
-                        text-white
-                        hover:bg-indigo-700
-                        focus:outline-none
-                        focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                      "
+                    <router-link to="/store"
+                      ><button
+                        type="submit"
+                        class="
+                          style-button
+                          hover:opacity-90
+                          group
+                          relative
+                          w-full
+                          flex
+                          justify-center
+                          py-2
+                          px-4
+                          border border-transparent
+                          text-sm
+                          font-medium
+                          text-white
+                          focus:outline-none
+                        "
+                      >
+                        Sign in
+                      </button></router-link
                     >
-                      Sign in
-                    </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

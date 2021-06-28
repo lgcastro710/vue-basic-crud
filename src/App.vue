@@ -1,21 +1,11 @@
 <template>
   <div id="app">
-    <!-- <Container /> -->
-    <Login />
+    <div id="nav">
+      <button class="text-white p-4">
+        <router-link to="/">Home</router-link>
+      </button>
+      <!-- <router-link to="/store">Store</router-link> -->
+    </div>
+    <router-view />
   </div>
 </template>
-
-<script>
-//import Container from "./components/Container.vue";
-import Login from "./components/Login.vue";
-
-export default {
-  components: {
-    //Container,
-    Login,
-  },
-};
-</script>
-
-
-

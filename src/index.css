@@ -1,3 +1,82 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+    box-shadow: 1px 1px 6px 4px #0000003d;
+    background-color: #fff;
+
+}
+
+.card-form {
+    padding: 20px;
+    flex-direction: column;
+    background-image: url("assets/bg-form.png");
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    width: 100%;
+    padding: 18px 0 18px 10px;
+    text-align: left;
+    box-shadow: 0px 4px 9px 0px #cfdfe2;
+    min-height: 60px;
+    font-family: 'Montserrat', sans-serif;
+    color: #6e7683;
+}
+
+.card-close {
+    padding: 19px 25px;
+    box-shadow: 0px 4px 4px 0px #f4747752;
+}
+
+
+.card-body {
+    height: 255px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px 0px #cfdfe2ab;
+    padding: 10px 0;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-description {
+    color: #f47477;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.card-view {
+    background-color: #48cdfb;
+
+    min-width: 120px;
+    outline: 0;
+}
+
+
+.search-input {
+    width: 100%;
+    border: 0;
+    padding: 19px 10px;
+    border-color: #48cdfb !important;
+}
+
+.border {
+    border: solid 1px #cde3ea;
+    margin: 10px 0;
+}
