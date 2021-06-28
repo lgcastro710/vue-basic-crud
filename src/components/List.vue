@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12">
+  <div class="col-8">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1"
@@ -8,26 +8,25 @@
       </div>
       <input type="text" class="form-control" v-model="txtBuscar" />
     </div>
-    <ul class="list-group">
-      <li
+    <ul class="md-layout md-gutter md-alignment-center">
+      <ListItem
         v-for="(item, key) in listaFiltrada"
         v-bind:key="key"
-        class="list-group-item"
-      >
-        {{ item.clave }}-{{ item.titulo }} : {{ item.descripcion }}
-        <button
-          v-on:click.prevent="eliminar(item.clave)"
-          class="btn btn-danger"
-        >
-          <i class="fa fa-trash"></i>
-        </button>
-      </li>
+        :item="item"
+        :eliminar="eliminar"
+        class="row"
+      ></ListItem>
     </ul>
   </div>
 </template>
 
 <script>
+import ListItem from "./ListItem";
+
 export default {
+  components: {
+    ListItem,
+  },
   data() {
     return {
       txtBuscar: "",
@@ -59,3 +58,5 @@ export default {
   },
 };
 </script>
+<style>
+</style>

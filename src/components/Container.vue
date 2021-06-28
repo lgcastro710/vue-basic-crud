@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row pt-3">
       <h3>Mi lista de pasatiempos</h3>
-      <Form :agregar="agregar"></Form>
-      <List :lista="lista" :eliminar="eliminar"></List>
+      <Form :agregar="agregar" class=""></Form>
+      <List :lista="lista" :eliminar="eliminar" class=""></List>
     </div>
   </div>
 </template>
@@ -27,11 +27,19 @@ export default {
   },
 
   methods: {
-    agregar: function (clave, titulo, descripcion) {
-      console.log("llego?");
+    agregar: function (clave, producto, precio, descripcion) {
+      if (
+        clave === "" ||
+        producto === "" ||
+        precio === "" ||
+        descripcion === ""
+      ) {
+        return false;
+      }
       var item = {
         clave: clave,
-        titulo: titulo,
+        producto: producto,
+        precio: precio,
         descripcion: descripcion,
       };
       // app.lista.push(item);
@@ -40,10 +48,9 @@ export default {
         .ref("vue-store/" + clave)
         .set(item);
     },
-
     eliminar: function (clave) {
       var index = this.lista
-        .map(function (obj) {
+        .map((obj) => {
           return obj.clave;
         })
         .indexOf(clave);

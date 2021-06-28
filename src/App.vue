@@ -1,17 +1,21 @@
 <template>
   <div id="app">
-    <Container />
+    <!-- <Container /> -->
+    <Login />
   </div>
 </template>
 
 <script>
-import Container from "./components/Container.vue";
+//import Container from "./components/Container.vue";
+import Login from "./components/Login.vue";
 
 export default {
   components: {
-    Container,
+    //Container,
+    Login,
   },
 };
 </script>
+
 
 
