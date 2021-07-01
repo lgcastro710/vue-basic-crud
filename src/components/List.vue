@@ -30,7 +30,6 @@
         :eliminar="eliminar"
         :setItem="setItem"
         :setEdit="setEdit"
-        :setBager="setBager"
       ></LisItem>
     </ul>
   </div>

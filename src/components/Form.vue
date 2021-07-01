@@ -38,8 +38,8 @@
           v-on:keypress="onChangeDataFrom"
         />
       </div>
-      <div>
-        <p>{{ message }}</p>
+      <div class="mb-3">
+        <p class="bg-red-600 text-white">{{ message }}</p>
       </div>
 
       <Button title="Crear" :onClick="addProduct"></Button>
