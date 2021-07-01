@@ -1,6 +1,6 @@
 <template>
   <nav class="" style="background: #48cdfb">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <button class="text-white p-4">
           <router-link to="/">
