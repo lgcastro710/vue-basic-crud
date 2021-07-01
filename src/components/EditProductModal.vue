@@ -1,7 +1,7 @@
 <template>
-  <Modal :onClose="onCloseEdit" title="editar producto">
-    <form class="text-center" action="#" method="POST">
-      <div class="my-4">
+  <Modal :onClose="onCloseEdit" title="Editar producto">
+    <form class="text-center px-6 py-4 shadow-lg" action="#" method="POST">
+      <div class="">
         <input
           id="nombre"
           type="text"
