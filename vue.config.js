@@ -1,3 +1,3 @@
-module.exports ={
-  publicPatch: 'vue-basic-crud'
-}
+// module.exports ={
+//   publicPatch: 'vue-basic-crud'
+// }

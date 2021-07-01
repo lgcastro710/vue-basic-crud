@@ -1,5 +1,7 @@
 # vue-basic-crud
 
+Demo [GitHub Pages](https://lgcastro710.github.io/vue-basic-crud/)
+
 ## Project setup
 ```
 yarn install

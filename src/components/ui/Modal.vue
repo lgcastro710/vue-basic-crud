@@ -52,21 +52,16 @@
                 class="text-lg leading-6 font-medium text-gray-900"
                 id="modal-title"
               >
-                {{ data.nombre }}
+                {{ title }}
               </h3>
-              <div>
-                <img :src="data.imageUrl" style="width: 450px" />
-              </div>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  {{ data.descripcion }}
-                </p>
-              </div>
+              <slot></slot>
             </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <Button :onClick="onClose"> Cerrar </Button>
+          <Button :onClick="onClose" style="background-color: #f47477">
+            Cerrar
+          </Button>
         </div>
       </div>
     </div>
@@ -80,7 +75,7 @@ export default {
   name: "Modal",
   props: {
     onClose: Function,
-    data: Object || String,
+    title: String,
   },
   components: {
     Button,

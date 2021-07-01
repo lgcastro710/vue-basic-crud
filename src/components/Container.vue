@@ -1,11 +1,13 @@
 <template>
-  <div class="container mx-auto">
+  <div class="mx-auto">
+    <Nav :lista="lista"></Nav>
+
     <div class="flex p-4 flex-col md:flex-row">
       <div class="p-4 box-border w-full md:w-96">
         <Form :agregar="agregar"></Form>
       </div>
       <div class="box-border" style="width: 100%">
-        <List :lista="lista" :eliminar="eliminar"></List>
+        <List :lista="lista" :eliminar="eliminar" :agregar="agregar"></List>
       </div>
     </div>
   </div>
@@ -14,6 +16,7 @@
 <script>
 import Form from "./Form";
 import List from "./List";
+import Nav from "./Nav";
 import firebase from "../../firebase";
 
 export default {
@@ -22,6 +25,7 @@ export default {
   components: {
     Form,
     List,
+    Nav,
   },
   data: () => ({
     lista: [],
@@ -35,8 +39,10 @@ export default {
           const childData = childSnapshot.val();
           if (
             childData.imageUrl === "" ||
-            childData.imageUrl.slice(0, 4) !== "http"
+            (childData.imageUrl.slice(0, 4) !== "http" &&
+              childData.imageUrl.slice(0, 4) !== "data")
           ) {
+            console.log(childData.imageUrl.slice(0, 4));
             childData.imageUrl = require("../assets/bg-not-found.png");
           }
           this.lista.push(childData);
@@ -89,6 +95,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #fff;
 }
 </style>

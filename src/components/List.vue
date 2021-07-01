@@ -11,14 +11,26 @@
         <i class="fa fa-search"></i>
       </ButtonSquare>
     </div>
-    <Modal v-if="item" :onClose="onClose" :data="item"></Modal>
+    <ShowProductModal
+      v-if="item"
+      :onClose="onClose"
+      :data="item"
+    ></ShowProductModal>
+    <EditProductModal
+      v-if="itemEdit"
+      :data="itemEdit"
+      :onCloseEdit="onCloseEdit"
+      :agregar="agregar"
+    ></EditProductModal>
     <ul class="flex" style="flex-wrap: wrap">
       <LisItem
-        v-for="(item, key) in listaFiltrada"
+        v-for="(product, key) in listaFiltrada"
         v-bind:key="key"
-        :item="item"
+        :product="product"
         :eliminar="eliminar"
         :setItem="setItem"
+        :setEdit="setEdit"
+        :setBager="setBager"
       ></LisItem>
     </ul>
   </div>
@@ -27,23 +39,27 @@
 <script>
 import LisItem from "./ListItem";
 import ButtonSquare from "./ui/ButtonSquare";
-import Modal from "./ui/Modal";
+import ShowProductModal from "./ShowProductModal";
+import EditProductModal from "./EditProductModal";
 
 export default {
   name: "List",
   props: {
     lista: Array,
     eliminar: Function,
+    agregar: Function,
   },
   components: {
     LisItem,
     ButtonSquare,
-    Modal,
+    ShowProductModal,
+    EditProductModal,
   },
   data: function () {
     return {
       txtBuscar: "",
       item: null,
+      itemEdit: null,
     };
   },
 
@@ -73,7 +89,16 @@ export default {
       this.item = item;
     },
     onClose: function () {
+      console.log("cerrar");
       this.item = null;
+    },
+    onCloseEdit: function () {
+      console.log("cerrar");
+      this.itemEdit = null;
+    },
+    setEdit: function (item) {
+      console.log("aqui", item);
+      this.itemEdit = item;
     },
   },
 };

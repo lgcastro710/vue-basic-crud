@@ -18,7 +18,7 @@
             class="md:h-auto z-10 relative"
           />
         </div>
-        <div class="md:w-1/2 w-full">
+        <div class="md:w-1/2">
           <div>
             <div
               class="
